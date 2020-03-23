@@ -2,31 +2,50 @@ import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
-
+import Colors from '../constants/Colors';
 import { MonoText } from '../components/StyledText';
+import { SearchBar } from 'react-native-elements';
 
-export default function HomeScreen() {
+export default class HomeScreen extends React.Component {
+  state = {
+    search: '',
+  };
+  updateSearch = search => {
+    this.setState({ search });
+  };
+  render() {
+    const { search } = this.state;
   return (
     <View style={styles.container}>
+
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <Text> </Text>
+        <Text> </Text>
+        <Text> </Text>
+        <Text> </Text>
+        <Text style={styles.getHeaderText}>  Restaurants</Text>
+        <Text> </Text>
+        <SearchBar
+            round
+            searchIcon={{ size: 24 }}
+            onChangeText={''}
+            onClear={''}
+            placeholder="Restaurants suchen..."
+            value={this.state.search}
+        />
         <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
+
+
+
         </View>
 
         <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+
 
           <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
 
           <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
+            <MonoText></MonoText>
           </View>
 
           <Text style={styles.getStartedText}>
@@ -40,44 +59,14 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
-
-        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View>
-      </View>
     </View>
   );
+  }
 }
 
 HomeScreen.navigationOptions = {
   header: null,
 };
-
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use useful development
-        tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
 
 function handleLearnMorePress() {
   WebBrowser.openBrowserAsync('https://docs.expo.io/versions/latest/workflow/development-mode/');
@@ -92,11 +81,11 @@ function handleHelpPress() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.screenBarColor,
   },
   developmentModeText: {
     marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
+    color: 'rgba(255,255,255,0.4)',
     fontSize: 14,
     lineHeight: 19,
     textAlign: 'center',
@@ -133,9 +122,16 @@ const styles = StyleSheet.create({
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: Colors.textColor,
     lineHeight: 24,
     textAlign: 'center',
+  },
+  getHeaderText: {
+    fontSize: 35,
+    color: Colors.textColorWhite,
+    //lineHeight: 24,
+    textAlign: 'left',
+    fontWeight:'bold',
   },
   tabBarInfoContainer: {
     position: 'absolute',
@@ -159,7 +155,7 @@ const styles = StyleSheet.create({
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: Colors.textColor,
     textAlign: 'center',
   },
   navigationFilename: {
