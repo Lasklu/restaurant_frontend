@@ -1,7 +1,11 @@
 # restaurant_frontend
 
-##Idee
+Idee
+======
+
 Frontend für eine App, die es ermöglich online zu reservieren und dabei den passenden Tisch über eine grafische Oberfläche auszuwählen.
 
-##Bilder
+Bilder
+========
+
 ![](/frontend/assets/images/homescreen.jpeg)
