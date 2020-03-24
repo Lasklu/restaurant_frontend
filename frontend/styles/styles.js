@@ -56,13 +56,13 @@ module.exports = StyleSheet.create({
     },
     getStartedText: {
         fontSize: 17,
-        color: Colors.textColor,
+        color: Colors.orangeColor,
         lineHeight: 24,
         textAlign: 'center',
     },
     getCardText: {
         fontSize: 25,
-        color: Colors.textColor,
+        color: Colors.orangeColor,
         fontWeight: '200',
         lineHeight: 24,
         textAlign: 'left',
@@ -88,7 +88,7 @@ module.exports = StyleSheet.create({
     },
     getHeaderText: {
         fontSize: 35,
-        color: Colors.textColorWhite,
+        color: Colors.whiteColor,
         //lineHeight: 24,
         textAlign: 'left',
         fontWeight:'bold',
@@ -125,7 +125,7 @@ module.exports = StyleSheet.create({
     },
     tabBarInfoText: {
         fontSize: 17,
-        color: Colors.textColor,
+        color: Colors.orangeColor,
         textAlign: 'center',
     },
     navigationFilename: {

@@ -1,12 +1,11 @@
 import React from 'react';
-import {View, ListView, FlatList, StyleSheet, Text, Image} from 'react-native';
+import {View, ListView, FlatList, StyleSheet, Text, Image, TouchableHighlight} from 'react-native';
 import {Button} from 'react-native-elements'
 import Colors from "../constants/Colors";
 import {CustomRow} from './customRow';
-import { IconButton } from 'react-native-paper';
-import  Ionicons  from '@expo/vector-icons';
+import {IconButton} from 'react-native-paper';
+import Ionicons from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/Ionicons';
-import TouchableHighlight from "react-native-web";
 
 const styles = StyleSheet.create({
     containerListView: {
@@ -16,16 +15,30 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         padding: 10,
-        marginLeft:2,
-        marginRight:0,
+        marginLeft: 2,
+        marginRight: 0,
         marginTop: 0,
         marginBottom: 8,
         borderRadius: 2,
         backgroundColor: Colors.screenBarColor,
         elevation: 2,
     },
+    overcontainer: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 10,
+        marginLeft: 2,
+        marginRight: 0,
+        marginTop: 0,
+        marginBottom: 8,
+        borderRadius: 2,
+        backgroundColor: Colors.screenBarColor,
+        elevation: 2,
+        borderBottomColor: Colors.orangeColor,
+        borderBottomWidth: 0.3,
+    },
     btncontainer: {
-        flex: 2,
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'stretch',
         justifyContent: 'space-between',
@@ -39,9 +52,9 @@ const styles = StyleSheet.create({
         color: '#ffffff',
     },
     container_text: {
-        flex: 1,
+        flex: 2,
         flexDirection: 'column',
-        marginLeft: 12,
+        marginLeft: 7,
         justifyContent: 'center',
         color: '#ffffff',
     },
@@ -56,41 +69,38 @@ const styles = StyleSheet.create({
     },
 });
 
-function CustomListView(itemList){
-
-}
-const CustomListview = ({ itemList }) => (
+const CustomListview = ({itemList}) => (
     <View style={styles.container}>
         <FlatList
             data={itemList}
-            renderItem={({ item }) => <View style={styles.container}>
-                <Image source={{ uri: item.image_url }} style={styles.photo} />
-                <View style={styles.btncontainer}>
-                    <View style={styles.container_text}>
-                        <Text style={styles.title}>
-                            {item.title}
-                        </Text>
-                        <Text style={styles.description}>
-                            {item.description}
-                        </Text>
+            renderItem={({item}) =>
+                <TouchableHighlight style={styles.btncontainer} onPress={() => console.log("h")}>
+                    <View style={styles.overcontainer}>
+                        <Image source={{uri: item.image_url}} style={styles.photo}/>
+                        <View style={styles.btncontainer}>
+                            <View style={styles.container_text}>
+                                <Text style={styles.title}>
+                                    {item.title}
+                                </Text>
+                                <Text style={styles.description}>
+                                    {item.description}
+                                </Text>
+                            </View>
+                            <View style={styles.buttonContainer}>
+                                <IconButton
+                                    icon="chevron-right"
+                                    color={Colors.orangeColor}
+                                    size={40}
+                                    onPress={() => console.log('Pressed')}
+                                />
+                            </View>
+                        </View>
                     </View>
-                    <View style={styles.buttonContainer}>
-                    <IconButton
-                        icon="chevron-right"
-                        color={Colors.textColor}
-                        size={40}
-                        onPress={() => console.log('Pressed')}
-                    />
-                    </View>
-                </View>
-            </View>
+                </TouchableHighlight>
             }
         />
-
     </View>
 );
-
-
 
 
 export default CustomListview;

@@ -16,7 +16,7 @@ export default function BottomTabNavigator({ navigation, route }) {
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
   navigation.setOptions({
       headerTitle: getHeaderTitle(route),
-      headerTintColor: Colors.textColor,
+      headerTintColor: Colors.orangeColor,
       headerTitleStyle: {
           fontWeight: 'bold',
       },
@@ -56,16 +56,16 @@ export default function BottomTabNavigator({ navigation, route }) {
                              },
                          })}
                          tabBarOptions={{
-                             activeTintColor: Colors.textColor,
+                             activeTintColor: Colors.orangeColor,
                              inactiveTintColor: 'gray',
                              style: {
-                                 borderTopColor: Colors.textColor,
+                                 borderTopColor: Colors.orangeColor,
                                  borderTopWidth: 2.5,
                                  backgroundColor: Platform.OS ==='ios' ? 'transparent' : Colors.tabBarColor2
                              }
                          }}>
 
-      <MainTabBar.Screen name="Home" component={HomeScreen}/>
+      <MainTabBar.Screen name="Home"  component={HomeScreen}/>
 
       <MainTabBar.Screen name="Settings" component={LinksScreen}  />
     </MainTabBar.Navigator>
