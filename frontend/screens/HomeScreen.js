@@ -1,12 +1,17 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, ImageBackground, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import Colors from '../constants/Colors';
 import { MonoText } from '../components/StyledText';
-import { SearchBar,Card, ListItem, Button2, Icon } from 'react-native-elements';
+import { SearchBar,Card, ListItem, Button2, Icon,  } from 'react-native-elements';
 import { Container, Header, Content, CardItem, Thumbnail, Button, Left, Body, Right } from 'native-base';
 let styles = require('../styles/styles');
+//import ModernHeader from "@freakycoder/react-native-header-view/lib/src/components/ModernHeader/ModernHeader";
+
+import CustomListview from "../components/customListView";
+import {CustomRow} from "../components/customRow";
+
 export default class HomeScreen extends React.Component {
   state = {
     search: '',
@@ -14,19 +19,76 @@ export default class HomeScreen extends React.Component {
   updateSearch = search => {
     this.setState({ search });
   };
+  getData(){
+        return [
+            {
+                key: 1, title: 'Albert Einstein',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://vivirtupasion.com/wp-content/uploads/2016/05/DANI_PERFILzoomCircle.png'
+            },
+            {
+                key: 2,
+                title: 'Isaac newton',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://3.bp.blogspot.com/-jd5x3rFRLJc/VngrSWSHcjI/AAAAAAAAGJ4/ORPqZNDpQoY/s1600/Profile%2Bcircle.png'
+            },
+            {
+                key: 1, title: 'Albert Einstein',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://vivirtupasion.com/wp-content/uploads/2016/05/DANI_PERFILzoomCircle.png'
+            },
+            {
+                key: 2,
+                title: 'Isaac newton',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://3.bp.blogspot.com/-jd5x3rFRLJc/VngrSWSHcjI/AAAAAAAAGJ4/ORPqZNDpQoY/s1600/Profile%2Bcircle.png'
+            },
+            {
+                key: 1, title: 'Albert Einstein',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://vivirtupasion.com/wp-content/uploads/2016/05/DANI_PERFILzoomCircle.png'
+            },
+            {
+                key: 2,
+                title: 'Isaac newton',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://3.bp.blogspot.com/-jd5x3rFRLJc/VngrSWSHcjI/AAAAAAAAGJ4/ORPqZNDpQoY/s1600/Profile%2Bcircle.png'
+            },
+            {
+                key: 1, title: 'Albert Einstein',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://vivirtupasion.com/wp-content/uploads/2016/05/DANI_PERFILzoomCircle.png'
+            },
+            {
+                key: 2,
+                title: 'Isaac newton',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://3.bp.blogspot.com/-jd5x3rFRLJc/VngrSWSHcjI/AAAAAAAAGJ4/ORPqZNDpQoY/s1600/Profile%2Bcircle.png'
+            },
+            {
+                key: 1, title: 'Albert Einstein',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://vivirtupasion.com/wp-content/uploads/2016/05/DANI_PERFILzoomCircle.png'
+            },
+            {
+                key: 2,
+                title: 'Isaac newton',
+                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+                image_url: 'http://3.bp.blogspot.com/-jd5x3rFRLJc/VngrSWSHcjI/AAAAAAAAGJ4/ORPqZNDpQoY/s1600/Profile%2Bcircle.png'
+            },
+        ]
+  }
+
   render() {
     const { search } = this.state;
-    const users = [
-      {
-        name: 'brynn',
-        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-      },
-    ];
   return (
     <View style={styles.container}>
-        <Text> </Text>
-        <Text> </Text>
-        <Text> </Text>
+
+        <ImageBackground source={require('../assets/images/berlin.jpg')} style={styles.backImage} imageStyle=
+            {{opacity:0.7}}>
+            <Text style={styles.innerText}> Berlin</Text>
+        </ImageBackground>
+
         <Text> </Text>
         <Text style={styles.getHeaderText}>  Restaurants</Text>
         <Text> </Text>
@@ -41,37 +103,18 @@ export default class HomeScreen extends React.Component {
               padding:0
             }}
         />
+        <View
+            style={{
+                borderBottomColor: Colors.textColor,
+                borderBottomWidth: 2.5,
+            }}
+        />
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-        <View style={styles.getStartedContainer}>
-          <Text style={styles.getStartedText}>Hier werden Ihnen alle Restaurants angezeigt.</Text>
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText></MonoText>
-          </View>
-        </View>
-
-
-          <Card
-              containerStyle={{backgroundColor: Colors.screenBarColor, borderWidth: 0,}}
-              title='Restaurant Schatzkammer'
-              image={require('../assets/images/robot-dev.png')}
-              titleStyle={styles.getCardText}>
-            <Text style={styles.cardSubText}>
-              Geöffnet!
-            </Text>
-
-            <Button bordered warning block>
-              <Text style={styles.getStartedText}> Reservieren!</Text>
-            </Button>
-            <Text> </Text>
-            <View
-                style={{
-                  borderBottomColor: Colors.textColor,
-                  borderBottomWidth: 3.5,
-                }}
-            />
-          </Card>
-
+            <View style={styles.container}>
+                <CustomListview
+                    itemList={this.getData()}
+                />
+            </View>
       </ScrollView>
     </View>
   );

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator, BottomTabBar } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '../components/TabBarIcon';
+import { StyleSheet, Text, View } from 'react-native';
+import { BlurView } from 'expo-blur';
 import { MaterialCommunityIcons } from 'react-native-vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Colors from "../constants/Colors";
-
-const BottomTab = createBottomTabNavigator();
+const MainTabBar = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 
 export default function BottomTabNavigator({ navigation, route }) {
@@ -22,10 +22,25 @@ export default function BottomTabNavigator({ navigation, route }) {
       },
       headerShown: false,
       headerStyle:{backgroundColor:Colors.screenBarColor},
-
   });
+    const TabBar = (props) => (
+        <BlurView
+            style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                right: 0,
+            }}
+            tint="dark"
+            intensity={100}
+        >
+            <BottomTabBar {...props} />
+        </BlurView>
+    );
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}
+    <MainTabBar.Navigator
+        tabBar={TabBar}
+        initialRouteName={INITIAL_ROUTE_NAME}
                          screenOptions={
                              ({ route }) => ({
                              tabBarIcon: ({ focused, color, size }) => {
@@ -37,19 +52,23 @@ export default function BottomTabNavigator({ navigation, route }) {
                                  } else if (route.name === 'Settings') {
                                      iconName = focused ? 'ios-list-box' : 'ios-list';
                                  }
-                                 return <TabBarIcon name={iconName} size={size} color={color} />;
+                                 return <TabBarIcon name={iconName} size={size} color={color}/>;
                              },
                          })}
                          tabBarOptions={{
                              activeTintColor: Colors.textColor,
                              inactiveTintColor: 'gray',
                              style: {
-                                 backgroundColor: Colors.tabBarColor,
+                                 borderTopColor: Colors.textColor,
+                                 borderTopWidth: 2.5,
+                                 backgroundColor: Platform.OS ==='ios' ? 'transparent' : Colors.tabBarColor2
                              }
                          }}>
-      <BottomTab.Screen name="Home" component={HomeScreen}/>
-      <BottomTab.Screen name="Settings" component={LinksScreen}/>
-    </BottomTab.Navigator>
+
+      <MainTabBar.Screen name="Home" component={HomeScreen}/>
+
+      <MainTabBar.Screen name="Settings" component={LinksScreen}  />
+    </MainTabBar.Navigator>
   );
 }
 
@@ -63,3 +82,18 @@ function getHeaderTitle(route) {
       return 'Links to learn more';
   }
 }
+
+
+const localStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    notBlurred: {
+        ...StyleSheet.absoluteFill,
+       // top: Constants.statusBarHeight,
+    },
+});
+
+

@@ -14,6 +14,9 @@ module.exports = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.screenBarColor,
     },
+    containerBox:{
+        backgroundColor: 'rgba(255,0,0,.6)'
+    },
     developmentModeText: {
         marginBottom: 20,
         color: 'rgba(255,255,255,0.4)',
@@ -58,17 +61,29 @@ module.exports = StyleSheet.create({
         textAlign: 'center',
     },
     getCardText: {
-        fontSize: 20,
-        color: Colors.textColorWhite,
-        fontWeight: 'bold',
+        fontSize: 25,
+        color: Colors.textColor,
+        fontWeight: '200',
         lineHeight: 24,
         textAlign: 'left',
     },
+    backImage:{
+        height: 200,
+        width:500,
+        justifyContent: 'center',
+        alignItems: 'flex-start'
+    },
+    innerText:{
+        color:'white',
+        fontSize: 45,
+        fontWeight: 'bold',
+    },
     cardSubText: {
         fontSize: 17,
-        color: Colors.textColorWhite,
+        color: 'green',
         lineHeight: 20,
         textAlign: 'left',
+        fontWeight: '200',
         marginBottom: 10,
     },
     getHeaderText: {
@@ -77,6 +92,16 @@ module.exports = StyleSheet.create({
         //lineHeight: 24,
         textAlign: 'left',
         fontWeight:'bold',
+    },
+    containerButton: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    button: {
+        backgroundColor: 'green',
+        width: '40%',
+        height: 40
     },
     tabBarInfoContainer: {
         position: 'absolute',
@@ -116,6 +141,47 @@ module.exports = StyleSheet.create({
     helpLinkText: {
         fontSize: 14,
         color: '#2e78b7',
+    },
+
+    //LISTVIEW
+    imageContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 10,
+        marginLeft:16,
+        marginRight:16,
+        marginTop: 8,
+        marginBottom: 8,
+        borderRadius: 5,
+        backgroundColor: '#FFF',
+        elevation: 2,
+    },
+    listViewTitle: {
+        fontSize: 16,
+        color: '#000',
+    },
+    ButtonContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    buttonbutton: {
+        width: '40%',
+        height: 40
+    },
+    listViewContainer_text: {
+        flex: 1,
+        flexDirection: 'column',
+        marginLeft: 12,
+        justifyContent: 'center',
+    },
+    listViewDescription: {
+        fontSize: 11,
+        fontStyle: 'italic',
+    },
+    listViewPhoto: {
+        height: 50,
+        width: 50,
     },
 
 });
