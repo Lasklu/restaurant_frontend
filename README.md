@@ -8,7 +8,7 @@ Frontend für eine App, die es ermöglich online zu reservieren und dabei den pa
 Bilder
 ======
 
-![](/frontend/assets/images/homescreen.jpeg)
+![](/frontend/assets/images/homescreen2.0.jpeg)
 
 
 
