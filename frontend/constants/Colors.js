@@ -6,6 +6,7 @@ export default {
   tabIconSelected: '#ff911e',
   tabBar: '#fefefe',
   orangeColor: '#ff911e',
+  orangeDarkColor: '#79450e',
   whiteColor: '#ffffff',
   tabBarColor2: '#202122',
   tabBarColor: '#0c0d0d',

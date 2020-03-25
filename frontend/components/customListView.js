@@ -74,7 +74,7 @@ const CustomListview = ({itemList}) => (
         <FlatList
             data={itemList}
             renderItem={({item}) =>
-                <TouchableHighlight style={styles.btncontainer} onPress={() => console.log("h")}>
+
                     <View style={styles.overcontainer}>
                         <Image source={{uri: item.image_url}} style={styles.photo}/>
                         <View style={styles.btncontainer}>
@@ -91,12 +91,11 @@ const CustomListview = ({itemList}) => (
                                     icon="chevron-right"
                                     color={Colors.orangeColor}
                                     size={40}
-                                    onPress={() => console.log('Pressed')}
+                                    //onPress={ test}
                                 />
                             </View>
                         </View>
                     </View>
-                </TouchableHighlight>
             }
         />
     </View>

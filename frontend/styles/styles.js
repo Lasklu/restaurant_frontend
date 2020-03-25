@@ -2,6 +2,7 @@
 
 import Colors from "../constants/Colors";
 import {Platform} from "react-native";
+import { Constants } from 'expo';
 
 var React = require('react-native');
 
@@ -13,6 +14,31 @@ module.exports = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.screenBarColor,
+    },
+    btncontainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        justifyContent: 'space-between',
+    },
+    buttonContainer:{
+
+        alignItems: 'center',
+    },
+    gradientContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        //paddingTop: Constants.statusBarHeight,
+        backgroundColor: 'transparent',
+    },
+    reservationButtonText: {
+        textAlign: 'center',
+        color: '#4C64FF',
+        padding: 15,
+        marginLeft: 1,
+        marginRight: 1,
+        width: 198
     },
     containerBox:{
         backgroundColor: 'rgba(255,0,0,.6)'

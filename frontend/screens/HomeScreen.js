@@ -1,5 +1,15 @@
 import * as React from 'react';
-import {Image, ImageBackground, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList} from 'react-native';
+import {
+    Image,
+    ImageBackground,
+    Platform,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+    FlatList,
+    TouchableHighlight
+} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import Colors from '../constants/Colors';
@@ -8,6 +18,8 @@ import {SearchBar, Card, ListItem, Button2, Icon,} from 'react-native-elements';
 import {Container, Header, Content, CardItem, Thumbnail, Button, Left, Body, Right} from 'native-base';
 import CustomListview from "../components/customListView";
 import {CustomRow} from "../components/customRow";
+import {Constants, LinearGradient} from 'expo';
+import MapView from 'react-native-maps'
 //import Carousel from 'react-native-snap-carousel';
 import Carousel from '../components/Carousel'
 
@@ -77,11 +89,19 @@ export default class HomeScreen extends React.Component {
 
         this.state = {
             search: '',
-            data: []
+            data: [],
+            mapRegion: {
+                latitude: 37.78825,
+                longitude: -122.4324,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            },
         };
         this.arrayholder = [];
     }
-
+    _handleMapRegionChange = mapRegion => {
+        this.setState({ mapRegion });
+    };
     updateSearch = search => {
         console.log(search);
         this.setState({search});
@@ -111,17 +131,18 @@ export default class HomeScreen extends React.Component {
         );
     }
 
-/*<Carousel
-style='slide'
-items={[{
-    title: 'Welcome, swipe to continue.',
-}, {
-    title: 'About feature X.',
-}, {
-    title: 'About feature Y.',
-}]}
-/>*/
+    /*<Carousel
+    style='slide'
+    items={[{
+        title: 'Welcome, swipe to continue.',
+    }, {
+        title: 'About feature X.',
+    }, {
+        title: 'About feature Y.',
+    }]}
+    />*/
 
+// <Image style={}source={require('../assets/images/icon_rest.png')}></Image>
     render() {
         const {search} = this.state;
         return (
@@ -132,7 +153,8 @@ items={[{
                 </ImageBackground>
 
                 <Text> </Text>
-                <Text style={styles.getHeaderText}> Restaurants</Text>
+                <Text style={styles.getHeaderText}> Hallo, Lukas</Text>
+
                 <Text> </Text>
                 <SearchBar
                     //onChangeText={text => this.searchFilterText(text)}
@@ -152,13 +174,17 @@ items={[{
                     }}
                 />
                 <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+
+                    <View style={styles.container}>
+                        <TouchableHighlight style={styles.btncontainer}
+                                            onPress={() => this.props.navigation.navigate('Reservation')}>
+                            <CustomListview
+                                itemList={data}
+                            />
+                        </TouchableHighlight>
+                    </View>
                     <View style={styles.container}>
 
-                        <Text></Text>
-                        <Text></Text>
-                        <CustomListview
-                            itemList={data}
-                        />
                     </View>
                 </ScrollView>
             </View>
