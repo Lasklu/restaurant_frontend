@@ -11,6 +11,7 @@ import useLinking from './navigation/useLinking';
 import LinksScreen from "./screens/LinksScreen";
 import ReservationScreen from "./screens/reservationScreen";
 import PersonsScreen from "./screens/reservationscreens/personsScreen"
+import ClockScreen from "./screens/reservationscreens/clockScreen";
 
 const Stack = createStackNavigator();
 
@@ -72,7 +73,6 @@ export default function App(props) {
                         <Stack.Screen name="Persons" options={{
                             title: 'Reservations',
                             headerShown: false,
-
                             headerStyle: {
                                 backgroundColor: Colors.screenBarColor,
                                 shadowColor: Colors.orangeColor,
@@ -83,6 +83,19 @@ export default function App(props) {
                                 //fontWeight: 'bold',
                             },
                         }} component={PersonsScreen}/>
+                        <Stack.Screen name="Clock" options={{
+                            title: 'Clock',
+                            headerShown: false,
+                            headerStyle: {
+                                backgroundColor: Colors.screenBarColor,
+                                shadowColor: Colors.orangeColor,
+
+                            },
+                            headerTintColor: Colors.orangeColor,
+                            headerTitleStyle: {
+                                //fontWeight: 'bold',
+                            },
+                        }} component={ClockScreen}/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </View>

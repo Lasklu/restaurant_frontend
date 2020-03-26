@@ -7,8 +7,8 @@ import {Button} from 'react-native-elements';
 import TabBarIcon from '../components/TabBarIcon';
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { TagSelect } from 'react-native-tag-select-max';
-import { Ionicons } from '@expo/vector-icons';
+import {TagSelect} from 'react-native-tag-select-max';
+import {Ionicons} from '@expo/vector-icons';
 import {MonoText} from '../components/StyledText';
 import {SearchBar, Card, ListItem, ThemeProvider, colors,} from 'react-native-elements';
 import * as native from 'native-base';
@@ -127,75 +127,73 @@ export default class ReservationScreen extends React.Component {
         );
     }
 
-    /*<Carousel
-    style='slide'
-    items={[{
-        title: 'Welcome, swipe to continue.',
-    }, {
-        title: 'About feature X.',
-    }, {
-        title: 'About feature Y.',
-    }]}
-    />*/
-
 //<Text style={styles.innerText}> Berlin</Text>
     render() {
         const iconSize = 15;
         const color = Colors.orangeColor;
         const data = [
-            { id: 1, label: <Ionicons name='ios-globe' size={iconSize} color={color}><Text style={{fontSize: 13}}> Website</Text></Ionicons>},
-            { id: 2, label: <Ionicons name='ios-beer' size={iconSize} color={color}><Text style={{fontSize: 13}}> Menu</Text></Ionicons> },
-            { id: 3, label: <Ionicons name='ios-call' size={iconSize}  color={color}></Ionicons> },
-            { id: 4, label: <Ionicons name='ios-clock' size={iconSize} color='green'><Text style={{fontSize: 13}}> Geschlossen</Text></Ionicons> },
+            {
+                id: 1,
+                label: <Ionicons name='ios-globe' size={iconSize} color={color}><Text
+                    style={{fontSize: 13}}> Website</Text></Ionicons>
+            },
+            {
+                id: 2,
+                label: <Ionicons name='ios-beer' size={iconSize} color={color}><Text style={{fontSize: 13}}> Menu</Text></Ionicons>
+            },
+            {id: 3, label: <Ionicons name='ios-call' size={iconSize} color={color}></Ionicons>},
+            {
+                id: 4,
+                label: <Ionicons name='ios-clock' size={iconSize} color='green'><Text
+                    style={{fontSize: 13}}> Geschlossen</Text></Ionicons>
+            },
 
         ];
         const {search} = this.state;
         return (
             <View style={styles.container}>
-                <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+
                     <ImageBackground source={require('../assets/images/rest1.jpg')} style={styles.backImage} imageStyle=
                         {{opacity: 1}}>
 
                     </ImageBackground>
-                    <Text> </Text>
+                <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+
                     <Text style={styles.getHeaderText}>Restaurant Schatzkammer</Text>
                     <Text> </Text>
-                    <View >
+                    <View>
                         <TagSelect
                             data={data}
                             max={500}
-                            itemStyle={{backgroundColor:Colors.screenBarColor,  borderColor: Colors.orangeColor,}}
-                            itemStyleSelected={{backgroundColor:Colors.screenBarColor,  borderColor: Colors.orangeColor}}
-                            itemLabelStyle={{color:'white'}}
-                            onItemPress={()=>console.log("ABCD")}
+                            itemStyle={{backgroundColor: Colors.screenBarColor, borderColor: Colors.orangeColor,}}
+                            itemStyleSelected={{
+                                backgroundColor: Colors.screenBarColor,
+                                borderColor: Colors.orangeColor
+                            }}
+                            itemLabelStyle={{color: 'white'}}
+                            onItemPress={() => console.log("ABCD")}
                             style={{alignItems: 'center'}}
                             onMaxError={() => {
-                            console.log("hd")
+                                console.log("hd")
                             }}
                         />
                     </View>
                     <Text></Text>
                     <Text></Text>
                     <View style={styles2.mapContainer}>
-                    <MapView styles={styles2.map}
-                             region={{
-                                 latitude:59.32932349999999,
-                                 longitude:18.068580800000063,
-                                 latitudeDelta:0.1,
-                                 longitudeDelta:0.1
-                             }}>
 
-                    </MapView>
                     </View>
                     <View style={styles.gradientContainer}>
-                        <TouchableOpacity style={styles.buttonContainer} onPress={()=> this.props.navigation.navigate('Persons')}>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                            this.props.navigation.navigate("Persons")
+
+                        }}>
                             <LinearGradient
                                 colors={['#ffe003', '#ffab20', '#ff9214', '#ff5e0e', '#ff6511', '#ff3324']}
                                 //colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
                                 start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
                                 style={{borderRadius: 5}}
                             >
-
                                 <View style={{
                                     margin: 1,
                                     backgroundColor: Colors.screenBarColor,
@@ -217,13 +215,7 @@ export default class ReservationScreen extends React.Component {
                         </TouchableOpacity>
                     </View>
                     <View>
-
-
                     </View>
-
-
-
-
                 </ScrollView>
             </View>
         );
@@ -257,21 +249,21 @@ const styles2 = StyleSheet.create({
     contentContainer: {
         paddingTop: 20,
     },
-    mapContainer:{
-      position:'absolute',
-      top:0,
-      left:0,
-right:0,
-bottom:0,
-        justifyContent:'flex-end',
-        alignItems:'center',
+    mapContainer: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
     },
     map: {
-        position:'absolute',
-        top:0,
-        left:0,
-        right:0,
-        bottom:0,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
 
     },
     circleGradient: {

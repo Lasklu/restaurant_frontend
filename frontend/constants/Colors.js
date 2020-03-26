@@ -7,6 +7,7 @@ export default {
   tabBar: '#fefefe',
   orangeColor: '#ff911e',
   orangeDarkColor: '#79450e',
+  cancelColor:'#ff272d',
   whiteColor: '#ffffff',
   tabBarColor2: '#202122',
   tabBarColor: '#0c0d0d',

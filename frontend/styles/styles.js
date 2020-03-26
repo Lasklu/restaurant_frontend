@@ -15,6 +15,11 @@ module.exports = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.screenBarColor,
     },
+    dropdownStyle:{
+
+
+
+    },
     btncontainer: {
         flex: 1,
         flexDirection: 'row',
@@ -28,7 +33,7 @@ module.exports = StyleSheet.create({
     gradientContainer: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         //paddingTop: Constants.statusBarHeight,
         backgroundColor: 'transparent',
     },
