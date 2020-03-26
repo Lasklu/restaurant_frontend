@@ -150,7 +150,10 @@ export default class ReservationScreen extends React.Component {
 
         ];
         const {search} = this.state;
+
+        //BEGIN ANI
         return (
+
             <View style={styles.container}>
 
                     <ImageBackground source={require('../assets/images/rest1.jpg')} style={styles.backImage} imageStyle=
@@ -161,7 +164,7 @@ export default class ReservationScreen extends React.Component {
 
                     <Text style={styles.getHeaderText}>Restaurant Schatzkammer</Text>
                     <Text> </Text>
-                    <View>
+                    <View  style={{alignItems:'center',justifyContent:'space-between', flex: 1}}>
                         <TagSelect
                             data={data}
                             max={500}
@@ -218,6 +221,9 @@ export default class ReservationScreen extends React.Component {
                     </View>
                 </ScrollView>
             </View>
+
+
+
         );
     }
 }

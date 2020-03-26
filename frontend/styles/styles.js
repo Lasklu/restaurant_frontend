@@ -105,6 +105,7 @@ module.exports = StyleSheet.create({
         alignItems: 'flex-start'
     },
     innerText:{
+        marginLeft:'5%',
         color:'white',
         fontSize: 45,
         fontWeight: 'bold',
@@ -121,6 +122,7 @@ module.exports = StyleSheet.create({
         fontSize: 35,
         color: Colors.whiteColor,
         //lineHeight: 24,
+        marginLeft:'5%',
         textAlign: 'left',
         fontWeight:'bold',
     },

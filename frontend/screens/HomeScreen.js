@@ -149,11 +149,11 @@ export default class HomeScreen extends React.Component {
             <View style={styles.container}>
                 <ImageBackground source={require('../assets/images/berlin.jpg')} style={styles.backImage} imageStyle=
                     {{opacity: 0.7}}>
-                    <Text style={styles.innerText}> Berlin</Text>
+                    <Text style={styles.innerText}>Berlin</Text>
                 </ImageBackground>
 
                 <Text> </Text>
-                <Text style={styles.getHeaderText}> Hallo, Lukas</Text>
+                <Text style={styles.getHeaderText}>  Hallo, Lukas</Text>
 
                 <Text> </Text>
                 <SearchBar

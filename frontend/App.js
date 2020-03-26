@@ -12,7 +12,8 @@ import LinksScreen from "./screens/LinksScreen";
 import ReservationScreen from "./screens/reservationScreen";
 import PersonsScreen from "./screens/reservationscreens/personsScreen"
 import ClockScreen from "./screens/reservationscreens/clockScreen";
-
+import DateScreen from "./screens/reservationscreens/dateScreen"
+import ConfirmationScreen from "./screens/reservationscreens/confirmationScreen"
 const Stack = createStackNavigator();
 
 export default function App(props) {
@@ -71,24 +72,24 @@ export default function App(props) {
                             },
                         }} component={ReservationScreen}/>
                         <Stack.Screen name="Persons" options={{
-                            title: 'Reservations',
-                            headerShown: false,
+                            title: '',
+                            headerShown: true,
                             headerStyle: {
                                 backgroundColor: Colors.screenBarColor,
-                                shadowColor: Colors.orangeColor,
+                                shadowColor: Colors.screenBarColor,
 
                             },
-                            headerTintColor: Colors.orangeColor,
+                            headerTintColor: Colors.screenBarColor,
                             headerTitleStyle: {
                                 //fontWeight: 'bold',
                             },
                         }} component={PersonsScreen}/>
                         <Stack.Screen name="Clock" options={{
                             title: 'Clock',
-                            headerShown: false,
+                            headerShown: true,
                             headerStyle: {
                                 backgroundColor: Colors.screenBarColor,
-                                shadowColor: Colors.orangeColor,
+                                shadowColor: Colors.screenBarColor,
 
                             },
                             headerTintColor: Colors.orangeColor,
@@ -96,6 +97,32 @@ export default function App(props) {
                                 //fontWeight: 'bold',
                             },
                         }} component={ClockScreen}/>
+                        <Stack.Screen name="Date" options={{
+                            title: '',
+                            headerShown: true,
+                            headerStyle: {
+                                backgroundColor: Colors.screenBarColor,
+                                shadowColor: Colors.screenBarColor,
+
+                            },
+                            headerTintColor: Colors.orangeColor,
+                            headerTitleStyle: {
+                                //fontWeight: 'bold',
+                            },
+                        }} component={DateScreen}/>
+                        <Stack.Screen name="Confirmation" options={{
+                            title: '',
+                            headerShown: true,
+                            headerStyle: {
+                                backgroundColor: Colors.screenBarColor,
+                                shadowColor: Colors.screenBarColor,
+
+                            },
+                            headerTintColor: Colors.orangeColor,
+                            headerTitleStyle: {
+                                //fontWeight: 'bold',
+                            },
+                        }} component={ConfirmationScreen}/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </View>

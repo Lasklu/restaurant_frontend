@@ -8,6 +8,7 @@ export default {
   orangeColor: '#ff911e',
   orangeDarkColor: '#79450e',
   cancelColor:'#ff272d',
+  confirmationColor:'#20ff00',
   whiteColor: '#ffffff',
   tabBarColor2: '#202122',
   tabBarColor: '#0c0d0d',

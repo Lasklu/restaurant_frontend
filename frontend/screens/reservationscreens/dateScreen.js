@@ -5,12 +5,9 @@ import Colors from "../../constants/Colors";
 import {LinearGradient} from "expo-linear-gradient";
 import {ScrollView} from "react-native-gesture-handler";
 import StepIndicator from "react-native-step-indicator";
-import clockScreen from "./clockScreen";
-import Button from "react-native-paper/src/components/Button";
 
-const labels = ["Personen", "Datum", "Uhrzeit", "Bestätigung"];
+const labels = ["Personen","Datum","Uhrzeit", "Bestätigung"];
 const customStyles = {
-    marginTop: 80,
     stepIndicatorSize: 25,
     currentStepIndicatorSize: 30,
     separatorStrokeWidth: 2,
@@ -32,22 +29,37 @@ const customStyles = {
     labelColor: '#999999',
     labelSize: 13,
     currentStepLabelColor: '#fe7013'
-}
+};
+let set = 0;
+
+
 //import ModernHeader from "@freakycoder/react-native-header-view/lib/src/components/ModernHeader/ModernHeader";
 let styles = require('../../styles/styles');
-export default class PersonsScreen extends React.Component {
+
+export default class DateScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.navigate = this.props.navigation.navigate;
+      //  var x= this.props.navigation.state.params.text;
         this.state = {
             currentPosition: 0
         };
 
     }
+    componentDidMount() {
+        setTimeout( () => {
+            this.setTimePassed() ;
+        },500);
+    }
 
+    setTimePassed() {
+        this.setState({currentPosition: 1});
+    }
 
 //<Text style={styles.innerText}> Berlin</Text>
     render() {
+
+       // console.log("PROPS " + x);
+        //const text = this.props.navigation.state.params.text;
         let data = [{
             value: '1',
         }, {
@@ -55,15 +67,15 @@ export default class PersonsScreen extends React.Component {
         }, {
             value: '3',
         }, {
-            value: '4',
+            value: '3',
         }, {
-            value: '5',
+            value: '3',
         }, {
-            value: '6',
+            value: '3',
         }, {
-            value: '7',
+            value: '3',
         }, {
-            value: '8',
+            value: '3',
         }];
 
 
@@ -76,8 +88,7 @@ export default class PersonsScreen extends React.Component {
                     currentPosition={this.state.currentPosition}
                     labels={labels}
                 />
-                <Text style={styles2.getHeaderText}>Wie viele Personen kommen mit?</Text>
-
+                <Text style={styles2.getHeaderText}>HALLO</Text>
                 <View style={{marginLeft: '8%', marginRight: '8%'}}>
                     <LinearGradient
                         colors={['#ffe003', '#ffab20', '#ff9214', '#ff5e0e', '#ff6511', '#ff3324']}
@@ -114,7 +125,7 @@ export default class PersonsScreen extends React.Component {
                                     inputContainerStyle={{borderBottomColor: 'gray', borderBottomWidth: 0}}
                                     data={data}
                                     onChangeText={() => setTimeout(() => {
-                                        return this.props.navigation.navigate('Date', {text: 'hallo'})
+                                        this.props.navigation.navigate('Clock')
                                     }, 1100)}
                                     //dropdownPosition={5}
                                 />
@@ -125,7 +136,7 @@ export default class PersonsScreen extends React.Component {
 
                         </View>
                     </LinearGradient>
-                    <Button onPress={() => {return this.props.navigation.navigate('Date', {text: 23})}}>TEST</Button>
+
                 </View>
                 <Text></Text>
                 <Text></Text>

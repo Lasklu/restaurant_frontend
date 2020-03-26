@@ -5,12 +5,10 @@ import Colors from "../../constants/Colors";
 import {LinearGradient} from "expo-linear-gradient";
 import {ScrollView} from "react-native-gesture-handler";
 import StepIndicator from "react-native-step-indicator";
-import clockScreen from "./clockScreen";
-import Button from "react-native-paper/src/components/Button";
 
-const labels = ["Personen", "Datum", "Uhrzeit", "Bestätigung"];
+
+const labels = ["Personen","Datum","Uhrzeit", "Bestätigung"];
 const customStyles = {
-    marginTop: 80,
     stepIndicatorSize: 25,
     currentStepIndicatorSize: 30,
     separatorStrokeWidth: 2,
@@ -32,22 +30,33 @@ const customStyles = {
     labelColor: '#999999',
     labelSize: 13,
     currentStepLabelColor: '#fe7013'
-}
+};
+let set = 0;
+
+
 //import ModernHeader from "@freakycoder/react-native-header-view/lib/src/components/ModernHeader/ModernHeader";
 let styles = require('../../styles/styles');
-export default class PersonsScreen extends React.Component {
+export default class ConfirmationScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.navigate = this.props.navigation.navigate;
         this.state = {
-            currentPosition: 0
+            currentPosition: 2
         };
 
     }
+    componentDidMount() {
+        setTimeout( () => {
+            this.setTimePassed() ;
+        },1000);
+    }
 
+    setTimePassed() {
+        this.setState({currentPosition: 3});
+    }
 
 //<Text style={styles.innerText}> Berlin</Text>
     render() {
+
         let data = [{
             value: '1',
         }, {
@@ -55,20 +64,21 @@ export default class PersonsScreen extends React.Component {
         }, {
             value: '3',
         }, {
-            value: '4',
+            value: '3',
         }, {
-            value: '5',
+            value: '3',
         }, {
-            value: '6',
+            value: '3',
         }, {
-            value: '7',
+            value: '3',
         }, {
-            value: '8',
+            value: '3',
         }];
 
 
         return (
             <View style={styles2.container}>
+
 
                 <StepIndicator
                     customStyles={customStyles}
@@ -76,9 +86,10 @@ export default class PersonsScreen extends React.Component {
                     currentPosition={this.state.currentPosition}
                     labels={labels}
                 />
-                <Text style={styles2.getHeaderText}>Wie viele Personen kommen mit?</Text>
 
-                <View style={{marginLeft: '8%', marginRight: '8%'}}>
+                <Text style={styles2.getHeaderText}>Bitte prüfe deine Eingaben</Text>
+
+                <View style={{marginLeft: '8%', marginRight: '8%', marginBottom:'10%'}}>
                     <LinearGradient
                         colors={['#ffe003', '#ffab20', '#ff9214', '#ff5e0e', '#ff6511', '#ff3324']}
                         //colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
@@ -90,34 +101,10 @@ export default class PersonsScreen extends React.Component {
                             backgroundColor: Colors.screenBarColor,
                             borderRadius: 5,
                         }}>
-                            <View style={{marginLeft: '13%', marginRight: '13%', marginBottom: '5%', marginTop: '0%'}}>
-                                <Dropdown
-                                    onPress={() => blur()}
-                                    textColor={Colors.orangeColor}
-                                    baseColor={Colors.orangeColor}
-                                    itemColor={Colors.orangeColor}
-                                    tintColor={'white'}
-                                    placeholderTextColor={'gray'}
-                                    borderBottomColor={Colors.orangeColor}
-                                    selectedItemColor={Colors.orangeColor}
-                                    disabledItemColor={Colors.orangeColor}
-                                    label='Anzahl Personen'
-                                    //style = {{color: 'gray'}}
-
-                                    pickerStyle={{
-                                        backgroundColor: Colors.tabBarColor,
-                                        borderWidth: 2,
-                                        borderColor: Colors.orangeDarkColor
-                                    }}
-                                    //itemContainerStyle={{backgroundColor:"blue",textColor:"white"}}
-                                    //itemTextStyle={{backgroundColor:"blue",textColor:"white"}}
-                                    inputContainerStyle={{borderBottomColor: 'gray', borderBottomWidth: 0}}
-                                    data={data}
-                                    onChangeText={() => setTimeout(() => {
-                                        return this.props.navigation.navigate('Date', {text: 'hallo'})
-                                    }, 1100)}
-                                    //dropdownPosition={5}
-                                />
+                            <View style={{marginLeft: '5%', marginRight: '13%', marginBottom: '5%', marginTop: '0%'}}>
+                                <Text style ={styles2.getCardText}>Personen:</Text>
+                                <Text style ={styles2.getCardText}>Datum:</Text>
+                                <Text style ={styles2.getCardText}>Uhrzeit:</Text>
 
 
                             </View>
@@ -125,10 +112,40 @@ export default class PersonsScreen extends React.Component {
 
                         </View>
                     </LinearGradient>
-                    <Button onPress={() => {return this.props.navigation.navigate('Date', {text: 23})}}>TEST</Button>
+
                 </View>
-                <Text></Text>
-                <Text></Text>
+
+                <View style={styles.gradientContainer}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                        //this.props.navigation.navigate("Root")
+
+                    }}>
+                        <LinearGradient
+                            colors={['#00ffd8', '#00ff99', '#1fff36', '#26ff00']}
+                            //colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
+                            start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
+                            style={{borderRadius: 5}}
+                        >
+                            <View style={{
+                                margin: 1,
+                                backgroundColor: Colors.screenBarColor,
+                                borderRadius: 5
+                            }}>
+                                <Text style={{
+                                    textAlign: 'center',
+                                    color: Colors.confirmationColor,
+                                    padding: 15,
+                                    marginLeft: 1,
+                                    marginRight: 1,
+                                    fontWeight: '200',
+                                    fontSize: 20,
+                                    width: 198
+                                }}>Bestätigen</Text>
+                            </View>
+                        </LinearGradient>
+                    </TouchableOpacity>
+
+                </View>
                 <View style={styles.gradientContainer}>
                     <TouchableOpacity style={styles.buttonContainer} onPress={() => {
                         this.props.navigation.navigate("Root")
@@ -161,6 +178,7 @@ export default class PersonsScreen extends React.Component {
                     </TouchableOpacity>
 
                 </View>
+
             </View>
         );
 
@@ -173,6 +191,15 @@ const styles2 = StyleSheet.create({
         flex: 2,
         backgroundColor: Colors.screenBarColor,
         justifyContent: 'center',
+    },
+    getCardText: {
+        marginTop:'10%',
+        //marginBottom:'5%',
+        fontSize: 25,
+        color: Colors.orangeColor,
+        fontWeight: '200',
+        lineHeight: 24,
+        textAlign: 'left',
     },
     getHeaderText: {
         fontSize: 35,
