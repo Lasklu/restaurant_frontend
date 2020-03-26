@@ -5,10 +5,13 @@ import Colors from "../../constants/Colors";
 import {LinearGradient} from "expo-linear-gradient";
 import {ScrollView} from "react-native-gesture-handler";
 import StepIndicator from "react-native-step-indicator";
+//import {SnackbarStatic } from "react-native-snackbar";
+import SnackBar from 'react-native-snackbar-component'
+import Snackbar from "react-native-paper/src/components/Snackbar";
 
-
-const labels = ["Personen","Datum","Uhrzeit", "Bestätigung"];
+const labels = ["Personen", "Datum", "Uhrzeit", "Bestätigung"];
 const customStyles = {
+
     stepIndicatorSize: 25,
     currentStepIndicatorSize: 30,
     separatorStrokeWidth: 2,
@@ -39,15 +42,26 @@ let styles = require('../../styles/styles');
 export default class ConfirmationScreen extends React.Component {
     constructor(props) {
         super(props);
+        this.numberPersons = this.props.route.params.numberPersons;
+        this.date = this.props.route.params.date;
+        this.time = this.props.route.params.time;
         this.state = {
-            currentPosition: 2
+            currentPosition: 2,
+            snackVisible: false,
         };
 
     }
+    apiCallFinished(){
+        this.setState({snackVisible: true});
+        setTimeout(()=>{
+            this.setState({snackVisible: false});
+            this.props.navigation.navigate('Root');
+        }, 1000);
+    }
     componentDidMount() {
-        setTimeout( () => {
-            this.setTimePassed() ;
-        },1000);
+        setTimeout(() => {
+            this.setTimePassed();
+        }, 1000);
     }
 
     setTimePassed() {
@@ -56,30 +70,15 @@ export default class ConfirmationScreen extends React.Component {
 
 //<Text style={styles.innerText}> Berlin</Text>
     render() {
-
-        let data = [{
-            value: '1',
-        }, {
-            value: '2',
-        }, {
-            value: '3',
-        }, {
-            value: '3',
-        }, {
-            value: '3',
-        }, {
-            value: '3',
-        }, {
-            value: '3',
-        }, {
-            value: '3',
-        }];
-
-
         return (
             <View style={styles2.container}>
+                <Snackbar
+                    visible={this.state.snackVisible}
+                    textMessage="Hello There!"
+                    actionHandler={()=>{console.log("snack time!")}}
 
-
+                    style={{backgroundColor:'green'}}
+                ><Text>Erfolgreich reserviert</Text></Snackbar>
                 <StepIndicator
                     customStyles={customStyles}
                     stepCount={4}
@@ -89,7 +88,7 @@ export default class ConfirmationScreen extends React.Component {
 
                 <Text style={styles2.getHeaderText}>Bitte prüfe deine Eingaben</Text>
 
-                <View style={{marginLeft: '8%', marginRight: '8%', marginBottom:'10%'}}>
+                <View style={{marginLeft: '8%', marginRight: '8%', marginTop:'3%',marginBottom: '0%'}}>
                     <LinearGradient
                         colors={['#ffe003', '#ffab20', '#ff9214', '#ff5e0e', '#ff6511', '#ff3324']}
                         //colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
@@ -102,9 +101,20 @@ export default class ConfirmationScreen extends React.Component {
                             borderRadius: 5,
                         }}>
                             <View style={{marginLeft: '5%', marginRight: '13%', marginBottom: '5%', marginTop: '0%'}}>
-                                <Text style ={styles2.getCardText}>Personen:</Text>
-                                <Text style ={styles2.getCardText}>Datum:</Text>
-                                <Text style ={styles2.getCardText}>Uhrzeit:</Text>
+                                <View style={styles.overcontainer}>
+                                    <View style={styles.btncontainer}>
+                                        <Text style={styles2.getCardText}>Personen:</Text>
+                                        <Text style={styles2.getCardText}>{this.numberPersons}</Text>
+                                    </View>
+                                    <View style={styles.btncontainer}>
+                                        <Text style={styles2.getCardText}>Datum:</Text>
+                                        <Text style={styles2.getCardText}>{this.date}</Text>
+                                    </View>
+                                    <View style={styles.btncontainer}>
+                                        <Text style={styles2.getCardText}>Uhrzeit:</Text>
+                                        <Text style={styles2.getCardText}>{this.time}</Text>
+                                    </View>
+                                </View>
 
 
                             </View>
@@ -116,15 +126,14 @@ export default class ConfirmationScreen extends React.Component {
                 </View>
 
                 <View style={styles.gradientContainer}>
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-                        //this.props.navigation.navigate("Root")
-
-                    }}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={
+                        ()=>{this.apiCallFinished();}
+                    }>
                         <LinearGradient
                             colors={['#00ffd8', '#00ff99', '#1fff36', '#26ff00']}
                             //colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
                             start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                            style={{borderRadius: 5}}
+                            style={{borderRadius: 5, marginTop:'15%'}}
                         >
                             <View style={{
                                 margin: 1,
@@ -155,7 +164,7 @@ export default class ConfirmationScreen extends React.Component {
                             colors={['#ff0081', '#ff035a', '#ff0a19', '#ff2435']}
                             //colors={['#00FFFF', '#17C8FF', '#329BFF', '#4C64FF', '#6536FF', '#8000FF']}
                             start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}
-                            style={{borderRadius: 5}}
+                            style={{borderRadius: 5, marginBottom:'20%'}}
                         >
                             <View style={{
                                 margin: 1,
@@ -193,7 +202,7 @@ const styles2 = StyleSheet.create({
         justifyContent: 'center',
     },
     getCardText: {
-        marginTop:'10%',
+        marginTop: '10%',
         //marginBottom:'5%',
         fontSize: 25,
         color: Colors.orangeColor,
@@ -202,13 +211,14 @@ const styles2 = StyleSheet.create({
         textAlign: 'left',
     },
     getHeaderText: {
+        marginBottom: '15%',
+        marginTop: '12%',
         fontSize: 35,
         color: Colors.whiteColor,
         //lineHeight: 24,
+        marginLeft:'5%',
         textAlign: 'left',
-        fontWeight: 'bold',
-        marginBottom: '15%',
-        marginTop: '12%'
+        fontWeight:'bold',
     },
 
 

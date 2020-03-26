@@ -21,7 +21,7 @@ module.exports = StyleSheet.create({
 
     },
     btncontainer: {
-        flex: 1,
+        //flex: 1,
         flexDirection: 'row',
         alignItems: 'stretch',
         justifyContent: 'space-between',

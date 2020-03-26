@@ -38,6 +38,8 @@ let styles = require('../../styles/styles');
 export default class ClockScreen extends React.Component {
     constructor(props) {
         super(props);
+        this.numberPersons= this.props.route.params.numberPersons;
+        this.date = this.props.route.params.date;
         this.state = {
             currentPosition: 1
         };
@@ -55,7 +57,6 @@ export default class ClockScreen extends React.Component {
 
 //<Text style={styles.innerText}> Berlin</Text>
     render() {
-
         let data = [{
             value: '14:00',
         }, {
@@ -123,8 +124,12 @@ export default class ClockScreen extends React.Component {
                                     //itemTextStyle={{backgroundColor:"blue",textColor:"white"}}
                                     inputContainerStyle={{borderBottomColor: 'gray', borderBottomWidth: 0}}
                                     data={data}
-                                    onChangeText={() => setTimeout(() => {
-                                        this.props.navigation.navigate('Confirmation')
+                                    onChangeText={(time) => setTimeout(() => {
+                                        this.props.navigation.navigate('Confirmation', {
+                                            numberPersons: this.numberPersons,
+                                            date: this.date,
+                                            time: time
+                                        })
                                     }, 1100)}
                                     //dropdownPosition={5}
                                 />

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Image, ImageBackground, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList} from 'react-native';
+import {Image, ImageBackground, Animated, Platform, StyleSheet, Text, TouchableOpacity, View, FlatList} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import * as WebBrowser from 'expo-web-browser';
 import Colors from '../constants/Colors';
@@ -98,6 +98,7 @@ export default class ReservationScreen extends React.Component {
         this.arrayholder = [];
     }
 
+
     updateSearch = search => {
         console.log(search);
         this.setState({search});
@@ -151,20 +152,20 @@ export default class ReservationScreen extends React.Component {
         ];
         const {search} = this.state;
 
-        //BEGIN ANI
+
         return (
 
             <View style={styles.container}>
 
-                    <ImageBackground source={require('../assets/images/rest1.jpg')} style={styles.backImage} imageStyle=
-                        {{opacity: 1}}>
+                <ImageBackground source={require('../assets/images/rest1.jpg')} style={styles.backImage} imageStyle=
+                    {{opacity: 1}}>
 
-                    </ImageBackground>
+                </ImageBackground>
                 <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
                     <Text style={styles.getHeaderText}>Restaurant Schatzkammer</Text>
                     <Text> </Text>
-                    <View  style={{alignItems:'center',justifyContent:'space-between', flex: 1}}>
+                    <View style={{alignItems: 'center', justifyContent: 'space-between', flex: 1}}>
                         <TagSelect
                             data={data}
                             max={500}
@@ -221,7 +222,6 @@ export default class ReservationScreen extends React.Component {
                     </View>
                 </ScrollView>
             </View>
-
 
 
         );

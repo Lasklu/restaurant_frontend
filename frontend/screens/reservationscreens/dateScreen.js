@@ -5,8 +5,9 @@ import Colors from "../../constants/Colors";
 import {LinearGradient} from "expo-linear-gradient";
 import {ScrollView} from "react-native-gesture-handler";
 import StepIndicator from "react-native-step-indicator";
+import {useNavigation} from "@react-navigation/core";
 
-const labels = ["Personen","Datum","Uhrzeit", "Bestätigung"];
+const labels = ["Personen", "Datum", "Uhrzeit", "Bestätigung"];
 const customStyles = {
     stepIndicatorSize: 25,
     currentStepIndicatorSize: 30,
@@ -32,23 +33,25 @@ const customStyles = {
 };
 let set = 0;
 
-
 //import ModernHeader from "@freakycoder/react-native-header-view/lib/src/components/ModernHeader/ModernHeader";
 let styles = require('../../styles/styles');
 
 export default class DateScreen extends React.Component {
     constructor(props) {
         super(props);
-      //  var x= this.props.navigation.state.params.text;
+        this.numberPersons = this.props.route.params.numberPersons;
+        //  var x= this.props.navigation.state.params.text;
+        // var params = props.navigation.state.params.text;
         this.state = {
             currentPosition: 0
         };
 
     }
+
     componentDidMount() {
-        setTimeout( () => {
-            this.setTimePassed() ;
-        },500);
+        setTimeout(() => {
+            this.setTimePassed();
+        }, 500);
     }
 
     setTimePassed() {
@@ -57,8 +60,8 @@ export default class DateScreen extends React.Component {
 
 //<Text style={styles.innerText}> Berlin</Text>
     render() {
-
-       // console.log("PROPS " + x);
+        console.log(this.x);
+        // console.log("PROPS " + x);
         //const text = this.props.navigation.state.params.text;
         let data = [{
             value: '1',
@@ -77,8 +80,7 @@ export default class DateScreen extends React.Component {
         }, {
             value: '3',
         }];
-
-
+        //console.log(this.params);
         return (
             <View style={styles2.container}>
 
@@ -124,8 +126,11 @@ export default class DateScreen extends React.Component {
                                     //itemTextStyle={{backgroundColor:"blue",textColor:"white"}}
                                     inputContainerStyle={{borderBottomColor: 'gray', borderBottomWidth: 0}}
                                     data={data}
-                                    onChangeText={() => setTimeout(() => {
-                                        this.props.navigation.navigate('Clock')
+                                    onChangeText={(date) => setTimeout(() => {
+                                        this.props.navigation.navigate('Clock', {
+                                            numberPersons: this.numberPersons,
+                                        date: date,
+                                        })
                                     }, 1100)}
                                     //dropdownPosition={5}
                                 />

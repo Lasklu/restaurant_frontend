@@ -83,9 +83,9 @@ export default function App(props) {
                             headerTitleStyle: {
                                 //fontWeight: 'bold',
                             },
-                        }} component={PersonsScreen}/>
+                        }} component={PersonsScreen}></Stack.Screen>
                         <Stack.Screen name="Clock" options={{
-                            title: 'Clock',
+                            title: '',
                             headerShown: true,
                             headerStyle: {
                                 backgroundColor: Colors.screenBarColor,

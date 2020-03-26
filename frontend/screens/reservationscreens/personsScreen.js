@@ -7,6 +7,7 @@ import {ScrollView} from "react-native-gesture-handler";
 import StepIndicator from "react-native-step-indicator";
 import clockScreen from "./clockScreen";
 import Button from "react-native-paper/src/components/Button";
+import {useNavigation} from "@react-navigation/core";
 
 const labels = ["Personen", "Datum", "Uhrzeit", "Bestätigung"];
 const customStyles = {
@@ -45,9 +46,10 @@ export default class PersonsScreen extends React.Component {
 
     }
 
-
 //<Text style={styles.innerText}> Berlin</Text>
     render() {
+
+
         let data = [{
             value: '1',
         }, {
@@ -113,8 +115,8 @@ export default class PersonsScreen extends React.Component {
                                     //itemTextStyle={{backgroundColor:"blue",textColor:"white"}}
                                     inputContainerStyle={{borderBottomColor: 'gray', borderBottomWidth: 0}}
                                     data={data}
-                                    onChangeText={() => setTimeout(() => {
-                                        return this.props.navigation.navigate('Date', {text: 'hallo'})
+                                    onChangeText={(numberPersons) => setTimeout(() => {
+                                        return this.props.navigation.navigate('Date', {numberPersons: numberPersons})
                                     }, 1100)}
                                     //dropdownPosition={5}
                                 />
@@ -125,7 +127,6 @@ export default class PersonsScreen extends React.Component {
 
                         </View>
                     </LinearGradient>
-                    <Button onPress={() => {return this.props.navigation.navigate('Date', {text: 23})}}>TEST</Button>
                 </View>
                 <Text></Text>
                 <Text></Text>
