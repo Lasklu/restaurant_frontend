@@ -8,7 +8,13 @@ import StepIndicator from "react-native-step-indicator";
 import clockScreen from "./clockScreen";
 import Button from "react-native-paper/src/components/Button";
 import {useNavigation} from "@react-navigation/core";
-
+import {
+    FadeOut,
+    FadeIn,
+    ZoomOut,
+    ZoomIn,
+    ScrollDriver,
+} from '@shoutem/animation';
 const labels = ["Personen", "Datum", "Uhrzeit", "Bestätigung"];
 const customStyles = {
     marginTop: 80,
@@ -78,7 +84,9 @@ export default class PersonsScreen extends React.Component {
                     currentPosition={this.state.currentPosition}
                     labels={labels}
                 />
+
                 <Text style={styles2.getHeaderText}>Wie viele Personen kommen mit?</Text>
+
 
                 <View style={{marginLeft: '8%', marginRight: '8%'}}>
                     <LinearGradient
@@ -133,7 +141,6 @@ export default class PersonsScreen extends React.Component {
                 <View style={styles.gradientContainer}>
                     <TouchableOpacity style={styles.buttonContainer} onPress={() => {
                         this.props.navigation.navigate("Root")
-
                     }}>
                         <LinearGradient
                             colors={['#ff0081', '#ff035a', '#ff0a19', '#ff2435']}

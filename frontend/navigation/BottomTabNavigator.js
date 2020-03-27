@@ -6,8 +6,9 @@ import {BlurView} from 'expo-blur';
 import {MaterialCommunityIcons} from 'react-native-vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
+import MapScreen from "../screens/MapScreen";
 import ReservationScreen from "../screens/reservationScreen";
-import mapScreen from "../screens/mapScreen";
+import mapScreen from "../screens/MapScreen";
 import Colors from "../constants/Colors";
 
 
@@ -61,6 +62,9 @@ export default function BottomTabNavigator({navigation, route}) {
                                 : 'md-bookmark';
                         } else if (route.name === 'Settings') {
                             iconName = focused ? 'ios-list-box' : 'ios-list';
+                        } else if (route.name ==='Karte'){
+                            iconName = focused ? 'md-map' :
+                                'ios-compass';
                         }
                         return <TabBarIcon name={iconName} size={size} color={color}/>;
                     },
@@ -75,6 +79,9 @@ export default function BottomTabNavigator({navigation, route}) {
                 }
             }}>
             <MainTabBar.Screen name="Home" options={{header: () => null}} component={HomeScreen}/>
+            <MainTabBar.Screen name="Karte" options={{
+                header:()=>null,
+            }} component={MapScreen}/>
             <MainTabBar.Screen name="Settings" options={{header: () => null}} component={LinksScreen}/>
 
         </MainTabBar.Navigator>
@@ -103,6 +110,8 @@ function showHeader(route) {
             return false;
         case 'Reservation':
             return true;
+        case 'Karte':
+            return false;
     }
 }
 

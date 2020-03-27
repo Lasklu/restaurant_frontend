@@ -1,4 +1,5 @@
 import * as React from 'react';
+//import SplashScreen from 'react-native-splash-screen'
 import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 import {SplashScreen} from 'expo';
 import * as Font from 'expo-font';
@@ -14,6 +15,8 @@ import PersonsScreen from "./screens/reservationscreens/personsScreen"
 import ClockScreen from "./screens/reservationscreens/clockScreen";
 import DateScreen from "./screens/reservationscreens/dateScreen"
 import ConfirmationScreen from "./screens/reservationscreens/confirmationScreen"
+import LoadingScreen from "./screens/LoadingScreen";
+import MapScreen from "./screens/MapScreen";
 const Stack = createStackNavigator();
 
 export default function App(props) {
@@ -27,7 +30,7 @@ export default function App(props) {
         async function loadResourcesAndDataAsync() {
             try {
                 SplashScreen.preventAutoHide();
-
+                SplashScreen.hide();
                 // Load our initial navigation state
                 setInitialNavigationState(await getInitialState());
 
@@ -56,7 +59,9 @@ export default function App(props) {
                 {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
                 <NavigationContainer ref={containerRef} initialState={initialNavigationState}>
                     <Stack.Navigator>
+
                         <Stack.Screen name="Root" component={BottomTabNavigator}/>
+                        <Stack.Screen name="Loading" component={LoadingScreen}/>
                         <Stack.Screen name="Reservation" options={{
                             title: 'Reservations',
                             headerShown: true,
@@ -130,6 +135,8 @@ export default function App(props) {
     }
 }
 
+//AS FIRST (SPLASHSCREEN)
+//
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -29,7 +29,12 @@
       "bundleIdentifier": "com.restaurant.frontend"
     },
     "android": {
-      "package": "com.restaurant.frontend"
+      "package": "com.restaurant.frontend",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBysYIvvwMtC9_Gg6FvL9eLoO9hwmI09Kg"
+        }
+      }
     }
   }
 }

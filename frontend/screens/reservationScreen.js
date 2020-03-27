@@ -161,6 +161,7 @@ export default class ReservationScreen extends React.Component {
                     {{opacity: 1}}>
 
                 </ImageBackground>
+
                 <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
                     <Text style={styles.getHeaderText}>Restaurant Schatzkammer</Text>
@@ -182,11 +183,10 @@ export default class ReservationScreen extends React.Component {
                             }}
                         />
                     </View>
-                    <Text></Text>
-                    <Text></Text>
-                    <View style={styles2.mapContainer}>
 
-                    </View>
+                    <Text></Text>
+                    <Text></Text>
+
                     <View style={styles.gradientContainer}>
                         <TouchableOpacity style={styles.buttonContainer} onPress={() => {
                             this.props.navigation.navigate("Persons")
@@ -218,9 +218,13 @@ export default class ReservationScreen extends React.Component {
                             </LinearGradient>
                         </TouchableOpacity>
                     </View>
+
                     <View>
+
                     </View>
+
                 </ScrollView>
+
             </View>
 
 
