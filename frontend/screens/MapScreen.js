@@ -1,10 +1,18 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import {
+    StyleSheet, Text, View, Dimensions, AppRegistry, ScrollView, Animated, Image, TouchableOpacity, TouchableHighlight
+} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import {RectButton} from 'react-native-gesture-handler';
 import MapView from "react-native-maps";
 import Colors from "../constants/Colors";
+import {Button} from "react-native-elements";
+import {LinearGradient} from "expo-linear-gradient";
+import styles from '../styles/styles'
+//import TouchableOpacity from "react-native-web/dist/exports/TouchableOpacity";
+//import TouchableHighlight from "react-native-web/src/exports/TouchableHighlight";
+
 const customStyle = [
     {
         elementType: 'geometry',
@@ -166,64 +174,287 @@ const customStyle = [
         ],
     },
 ];
-export default function mapScreen() {
-    return (
-        <MapView
-            customMapStyle={customStyle}
-            style={{
-                flex: 1
-            }}
-            initialRegion={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421
-            }}
-        />
+const Images = [
+    {uri: "https://i.imgur.com/sNam9iJ.jpg"},
+    {uri: "https://i.imgur.com/N7rlQYt.jpg"},
+    {uri: "https://i.imgur.com/UDrH0wm.jpg"},
+    {uri: "https://i.imgur.com/Ka8kNST.jpg"}
+]
+const {width, height} = Dimensions.get("window");
+const CARD_HEIGHT = height / 4;
+const CARD_WIDTH = CARD_HEIGHT - 50;
 
-    );
-}
+export default class mapScreen extends React.Component {
+    constructor(props) {
+        super(props);
+        this.navigate = this.props.navigation.navigate;
+        this.state = {
+            markers: [
+                {
+                    coordinate: {
+                        latitude: 45.524548,
+                        longitude: -122.6749817,
+                    },
+                    title: "Best Place",
+                    description: "This is the best place in Portland",
+                    image: Images[0],
+                },
+                {
+                    coordinate: {
+                        latitude: 45.524578,
+                        longitude: -122.666667,
+                    },
+                    title: "Best Place",
+                    description: "This is the best place in Portland",
+                    image: Images[0],
+                },
+                {
+                    coordinate: {
+                        latitude: 45.524698,
+                        longitude: -122.6655507,
+                    },
+                    title: "Second Best Place",
+                    description: "This is the second best place in Portland",
+                    image: Images[1],
+                },
+                {
+                    coordinate: {
+                        latitude: 45.5230786,
+                        longitude: -122.6701034,
+                    },
+                    title: "Third Best Place",
+                    description: "This is the third best place in Portland",
+                    image: Images[2],
+                },
+                {
+                    coordinate: {
+                        latitude: 45.521016,
+                        longitude: -122.6561917,
+                    },
+                    title: "Fourth Best Place",
+                    description: "This is the fourth best place in Portland",
+                    image: Images[3],
+                },
+            ],
+            region: {
+                latitude: 45.52220671242907,
+                longitude: -122.6653281029795,
+                latitudeDelta: 0.04864195044303443,
+                longitudeDelta: 0.040142817690068,
+            },
+        };
 
-function OptionButton({ icon, label, onPress, isLastOption }) {
-    return (
-        <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
-            <View style={{ flexDirection: 'row' }}>
-                <View style={styles.optionIconContainer}>
-                    <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" />
-                </View>
-                <View style={styles.optionTextContainer}>
-                    <Text style={styles.optionText}>{label}</Text>
-                </View>
+    }
+
+    componentWillMount() {
+        this.index = 0;
+        this.animation = new Animated.Value(0);
+    }
+
+    componentDidMount() {
+        // We should detect when scrolling has stopped then animate
+        // We should just debounce the event listener here
+        this.animation.addListener(({value}) => {
+            let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+            if (index >= this.state.markers.length) {
+                index = this.state.markers.length - 1;
+            }
+            if (index <= 0) {
+                index = 0;
+            }
+
+            clearTimeout(this.regionTimeout);
+            this.regionTimeout = setTimeout(() => {
+                if (this.index !== index) {
+                    this.index = index;
+                    const {coordinate} = this.state.markers[index];
+                    this.map.animateToRegion(
+                        {
+                            ...coordinate,
+                            latitudeDelta: this.state.region.latitudeDelta,
+                            longitudeDelta: this.state.region.longitudeDelta,
+                        },
+                        350
+                    );
+                }
+            }, 10);
+        });
+    }
+
+
+    render() {
+        const interpolations = this.state.markers.map((marker, index) => {
+            const inputRange = [
+                (index - 1) * CARD_WIDTH,
+                index * CARD_WIDTH,
+                ((index + 1) * CARD_WIDTH),
+            ];
+            const scale = this.animation.interpolate({
+                inputRange,
+                outputRange: [1, 2.5, 1],
+                extrapolate: "clamp",
+            });
+            const opacity = this.animation.interpolate({
+                inputRange,
+                outputRange: [0.35, 1, 0.35],
+                extrapolate: "clamp",
+            });
+            return {scale, opacity};
+        });
+
+        return (
+            <View style={styles2.container}>
+                <MapView
+                    ref={map => this.map = map}
+                    initialRegion={this.state.region}
+                    style={styles2.container}
+                >
+                    {this.state.markers.map((marker, index) => {
+                        const scaleStyle = {
+                            transform: [
+                                {
+                                    scale: interpolations[index].scale,
+                                },
+                            ],
+                        };
+                        const opacityStyle = {
+                            opacity: interpolations[index].opacity,
+                        };
+                        return (
+                            <MapView.Marker key={index} coordinate={marker.coordinate}>
+                                <Animated.View style={[styles2.markerWrap, opacityStyle]}>
+                                    <Animated.View style={[styles2.ring, scaleStyle]}/>
+                                    <View style={styles2.marker}/>
+                                </Animated.View>
+                            </MapView.Marker>
+                        );
+                    })}
+                </MapView>
+                <Animated.ScrollView
+                    horizontal
+                    scrollEventThrottle={1}
+                    showsHorizontalScrollIndicator={false}
+                    snapToInterval={CARD_WIDTH}
+                    onScroll={Animated.event(
+                        [
+                            {
+                                nativeEvent: {
+                                    contentOffset: {
+                                        x: this.animation,
+                                    },
+                                },
+                            },
+                        ],
+                        {useNativeDriver: true}
+                    )}
+                    style={styles2.scrollView}
+                    contentContainerStyle={styles2.endPadding}
+                >
+                    {this.state.markers.map((marker, index) => (
+                            <View style={styles2.card} key={index}>
+
+                                <Image
+                                    source={marker.image}
+                                    style={styles2.cardImage}
+                                    resizeMode="cover"
+                                />
+
+                                <View style={styles2.textContent}>
+                                   <Button style={{color: "white"}}>{marker.title}</Button>
+                                </View>
+
+                            </View>
+
+                    ))}
+
+                </Animated.ScrollView>
             </View>
-        </RectButton>
-    );
+        );
+    }
 }
 
-const styles = StyleSheet.create({
+
+const styles2 = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fafafa',
     },
-    contentContainer: {
-        paddingTop: 15,
+    scrollView: {
+        position: "absolute",
+        bottom: 30,
+        left: 0,
+        right: 0,
+        paddingVertical: 10,
     },
-    optionIconContainer: {
-        marginRight: 12,
+    endPadding: {
+        paddingRight: width - CARD_WIDTH,
     },
-    option: {
-        backgroundColor: '#fdfdfd',
-        paddingHorizontal: 15,
-        paddingVertical: 15,
-        borderWidth: StyleSheet.hairlineWidth,
-        borderBottomWidth: 0,
-        borderColor: '#ededed',
+    ButtonContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
-    lastOption: {
-        borderBottomWidth: StyleSheet.hairlineWidth,
+    buttonContainer:{
+        alignItems: 'center',
     },
-    optionText: {
-        fontSize: 15,
-        alignSelf: 'flex-start',
-        marginTop: 1,
+    card: {
+        padding: 10,
+        elevation: 2,
+        backgroundColor: "rgba(85,85,85,0.8)",
+        marginHorizontal: 10,
+        shadowColor: "#ffffff",
+        shadowRadius: 5,
+        shadowOpacity: 0.3,
+        shadowOffset: {x: 2, y: -2},
+        height: CARD_HEIGHT,
+        width: CARD_WIDTH,
+        overflow: "hidden",
+        marginBottom: '6%',
+    },
+    cardImage: {
+        flex: 3,
+        width: "100%",
+        height: "100%",
+        alignSelf: "center",
+    },
+    textContent: {
+        flex: 1,
+    },
+
+    cardtitle: {
+        fontSize: 12,
+        marginTop: 5,
+        color: Colors.orangeColor,
+        fontWeight: "bold",
+    },
+    cardDescription: {
+        fontSize: 12,
+        color: Colors.orangeColor,
+    },
+    gradientContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        marginTop:'3%',
+        //paddingTop: Constants.statusBarHeight,
+        backgroundColor: 'transparent',
+    },
+    markerWrap: {
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    marker: {
+        position: "absolute",
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: "rgba(195,112,11,0.9)",
+    },
+    ring: {
+        width: 24,
+        height: 24,
+        borderRadius: 12,
+        backgroundColor: "rgba(150,53,17,0.3)",
+        borderWidth: 1,
+        borderColor: "rgba(191,117,8,0.5)",
     },
 });
