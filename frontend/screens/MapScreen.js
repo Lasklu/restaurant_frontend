@@ -5,7 +5,7 @@ import {
 import {Ionicons} from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
 import {RectButton} from 'react-native-gesture-handler';
-import MapView from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import Colors from "../constants/Colors";
 import {Button} from "react-native-elements";
 import {LinearGradient} from "expo-linear-gradient";
@@ -13,7 +13,8 @@ import styles from '../styles/styles'
 //import TouchableOpacity from "react-native-web/dist/exports/TouchableOpacity";
 //import TouchableHighlight from "react-native-web/src/exports/TouchableHighlight";
 
-const customStyle = [
+/*const MapStyle = [
+
     {
         elementType: 'geometry',
         stylers: [
@@ -174,7 +175,160 @@ const customStyle = [
         ],
     },
 ];
+ */
+const MapStyle = [
+    {
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#242f3e"
+            }
+        ]
+    },
+    {
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#746855"
+            }
+        ]
+    },
+    {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#242f3e"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.locality",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#d59563"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#d59563"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.government",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#6b9a76"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#38414e"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#746855"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "weight": 1.5
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#f3d19c"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#2f3948"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "color": "#17263c"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#060116"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#515c6d"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "color": "#17263c"
+            }
+        ]
+    }
+];
 const Images = [
+    {uri: "https://i.imgur.com/sNam9iJ.jpg"},
     {uri: "https://i.imgur.com/sNam9iJ.jpg"},
     {uri: "https://i.imgur.com/N7rlQYt.jpg"},
     {uri: "https://i.imgur.com/UDrH0wm.jpg"},
@@ -195,7 +349,7 @@ export default class mapScreen extends React.Component {
                         latitude: 45.524548,
                         longitude: -122.6749817,
                     },
-                    title: "Best Place",
+                    title: "Restaurant Schatzkammer",
                     description: "This is the best place in Portland",
                     image: Images[0],
                 },
@@ -305,9 +459,11 @@ export default class mapScreen extends React.Component {
         return (
             <View style={styles2.container}>
                 <MapView
+                    provider={PROVIDER_GOOGLE}
                     ref={map => this.map = map}
                     initialRegion={this.state.region}
                     style={styles2.container}
+                    customMapStyle={MapStyle}
                 >
                     {this.state.markers.map((marker, index) => {
                         const scaleStyle = {
@@ -351,20 +507,23 @@ export default class mapScreen extends React.Component {
                     contentContainerStyle={styles2.endPadding}
                 >
                     {this.state.markers.map((marker, index) => (
-                            <View style={styles2.card} key={index}>
 
-                                <Image
-                                    source={marker.image}
-                                    style={styles2.cardImage}
-                                    resizeMode="cover"
-                                />
+                        <View style={styles2.card} key={index}>
 
-                                <View style={styles2.textContent}>
-                                   <Button style={{color: "white"}}>{marker.title}</Button>
-                                </View>
-
+                            <TouchableOpacity style={{flex:1}} onPress={()=> this.props.navigation.navigate('Reservation')}>
+                            <Image
+                                source={marker.image}
+                                style={styles2.cardImage}
+                                resizeMode="cover"
+                            />
+                            <View style={styles2.textContent}>
+                                <Text numberOfLines={1} style={styles2.cardtitle}>{marker.title}</Text>
+                                <Text numberOfLines={1} style={styles2.cardDescription}>
+                                    {marker.description}
+                                </Text>
                             </View>
-
+                            </TouchableOpacity>
+                        </View>
                     ))}
 
                 </Animated.ScrollView>
@@ -377,6 +536,12 @@ export default class mapScreen extends React.Component {
 const styles2 = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    titleText:{
+        height:'25%',
+        fontSize: 18,
+        color: 'white',
+        fontWeight: '600',
     },
     scrollView: {
         position: "absolute",
@@ -399,16 +564,18 @@ const styles2 = StyleSheet.create({
     card: {
         padding: 10,
         elevation: 2,
-        backgroundColor: "rgba(85,85,85,0.8)",
+        backgroundColor: 'rgba(72,72,72,0.75)',
+
         marginHorizontal: 10,
         shadowColor: "#ffffff",
         shadowRadius: 5,
         shadowOpacity: 0.3,
-        shadowOffset: {x: 2, y: -2},
+        shadowOffset: { x: 2, y: -2 },
         height: CARD_HEIGHT,
         width: CARD_WIDTH,
         overflow: "hidden",
-        marginBottom: '6%',
+        marginBottom:'8%',
+        flex: 1,
     },
     cardImage: {
         flex: 3,
@@ -417,20 +584,35 @@ const styles2 = StyleSheet.create({
         alignSelf: "center",
     },
     textContent: {
+        justifyContent:'flex-start',
+        height:'50%',
+        width:'100%',
         flex: 1,
+        alignItems: 'flex-start',
+        color:'white'
+    },
+    textContent2: {
+        justifyContent:'flex-start',
+        height:'100%',
+        width:'100%',
+        flex: 3,
+        alignItems: 'flex-start',
+        alignSelf:'flex-start'
     },
 
     cardtitle: {
         fontSize: 12,
         marginTop: 5,
-        color: Colors.orangeColor,
         fontWeight: "bold",
+        color:'white'
     },
     cardDescription: {
         fontSize: 12,
-        color: Colors.orangeColor,
+        color: "#ffffff",
     },
     gradientContainer: {
+        alignSelf: 'flex-end',
+
         flex: 1,
         alignItems: 'center',
         justifyContent: 'flex-start',
@@ -447,14 +629,15 @@ const styles2 = StyleSheet.create({
         width: 8,
         height: 8,
         borderRadius: 4,
-        backgroundColor: "rgba(195,112,11,0.9)",
+        backgroundColor: "rgba(255,153,11,0.9)",
     },
     ring: {
-        width: 24,
-        height: 24,
+        width: 36,
+        height: 36,
         borderRadius: 12,
-        backgroundColor: "rgba(150,53,17,0.3)",
-        borderWidth: 1,
-        borderColor: "rgba(191,117,8,0.5)",
+
+        backgroundColor: "rgba(219,122,0,0.5)",
+        borderWidth: 3,
+        borderColor: "rgba(226,146,8,0.5)",
     },
 });

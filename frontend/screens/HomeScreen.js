@@ -147,13 +147,16 @@ export default class HomeScreen extends React.Component {
         const {search} = this.state;
         return (
             <View style={styles.container}>
-                <ImageBackground source={require('../assets/images/berlin.jpg')} style={styles.backImage} imageStyle=
+                <View style={styles.imgContainer}>
+                <ImageBackground source={require('../assets/images/berlin.jpg')} resizeMode="cover" style={styles.backImage} imageStyle=
                     {{opacity: 0.7}}>
                     <Text style={styles.innerText}>Berlin</Text>
                 </ImageBackground>
 
-                <Text> </Text>
-                <Text style={styles.getHeaderText}>  Hallo, Lukas</Text>
+                </View>
+            <Text></Text>
+
+                <Text style={styles.getHeaderText}>Hallo, Lukas</Text>
 
                 <Text> </Text>
                 <SearchBar

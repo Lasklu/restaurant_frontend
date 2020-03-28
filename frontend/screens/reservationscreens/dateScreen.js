@@ -60,9 +60,6 @@ export default class DateScreen extends React.Component {
 
 //<Text style={styles.innerText}> Berlin</Text>
     render() {
-        console.log(this.x);
-        // console.log("PROPS " + x);
-        //const text = this.props.navigation.state.params.text;
         let data = [{
             value: '1',
         }, {
@@ -80,7 +77,6 @@ export default class DateScreen extends React.Component {
         }, {
             value: '3',
         }];
-        //console.log(this.params);
         return (
             <View style={styles2.container}>
 

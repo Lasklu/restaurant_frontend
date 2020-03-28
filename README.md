@@ -10,7 +10,10 @@ Bilder
 
 ![](/frontend/assets/images/homescreen2.0.jpeg)
 
+Setup
+======
 
+Es muss eine app.json erstellt werden. Einfach an Lukas Laskowski wendenn
 
 Konzept
 ========

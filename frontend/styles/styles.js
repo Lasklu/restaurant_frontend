@@ -14,6 +14,7 @@ module.exports = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Colors.screenBarColor,
+       // justifyContent:'flex-start',
     },
     dropdownStyle:{
 
@@ -30,6 +31,7 @@ module.exports = StyleSheet.create({
 
         alignItems: 'center',
     },
+
     gradientContainer: {
         flex: 1,
         alignItems: 'center',
@@ -57,6 +59,7 @@ module.exports = StyleSheet.create({
     },
     contentContainer: {
         paddingTop: 30,
+        justifyContent:'flex-start',
     },
     welcomeContainer: {
         alignItems: 'center',
@@ -98,9 +101,15 @@ module.exports = StyleSheet.create({
         lineHeight: 24,
         textAlign: 'left',
     },
+    imgContainer:{
+        backgroundColor:'transparent',
+        marginTop:'0%',
+        height: '20%',
+        width:'100%',
+    },
     backImage:{
-        height: 200,
-        width:500,
+        height: '100%',
+        width:'115%',
         justifyContent: 'center',
         alignItems: 'flex-start'
     },
@@ -109,6 +118,7 @@ module.exports = StyleSheet.create({
         color:'white',
         fontSize: 45,
         fontWeight: 'bold',
+        //marginTop:'10%'
     },
     cardSubText: {
         fontSize: 17,

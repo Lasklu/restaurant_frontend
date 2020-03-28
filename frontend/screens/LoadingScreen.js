@@ -1,4 +1,6 @@
+
 import * as React from 'react';
+
 import {
     Image,
     ImageBackground,
@@ -282,5 +284,7 @@ function handleHelpPress() {
         'https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change'
     );
 }
+
+
 
 

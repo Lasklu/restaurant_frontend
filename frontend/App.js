@@ -16,6 +16,7 @@ import ClockScreen from "./screens/reservationscreens/clockScreen";
 import DateScreen from "./screens/reservationscreens/dateScreen"
 import ConfirmationScreen from "./screens/reservationscreens/confirmationScreen"
 import LoadingScreen from "./screens/LoadingScreen";
+import TestScreen from "./screens/testScreen";
 import MapScreen from "./screens/MapScreen";
 const Stack = createStackNavigator();
 
