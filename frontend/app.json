@@ -30,6 +30,7 @@
     },
     "android": {
       "package": "com.restaurant.frontend",
+      "versionCode": 1,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyBysYIvvwMtC9_Gg6FvL9eLoO9hwmI09Kg"

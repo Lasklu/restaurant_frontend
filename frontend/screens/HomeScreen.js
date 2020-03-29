@@ -160,7 +160,6 @@ export default class HomeScreen extends React.Component {
 
                 <Text> </Text>
                 <SearchBar
-                    //onChangeText={text => this.searchFilterText(text)}
                     onClearText={''}
                     searchIcon={{size: 24}}
                     placeholderTextColor={Colors.orangeColor}

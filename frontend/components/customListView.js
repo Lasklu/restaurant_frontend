@@ -74,7 +74,6 @@ const CustomListview = ({itemList}) => (
         <FlatList
             data={itemList}
             renderItem={({item}) =>
-
                     <View style={styles.overcontainer}>
                         <Image source={{uri: item.image_url}} style={styles.photo}/>
                         <View style={styles.btncontainer}>

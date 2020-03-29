@@ -90,42 +90,10 @@ const data = [
 export default class ReservationScreen extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             search: '',
             data: []
         };
-        this.arrayholder = [];
-    }
-
-
-    updateSearch = search => {
-        console.log(search);
-        this.setState({search});
-        //this.filterData();
-        console.log("GHJAGDKJW")
-    };
-    searchFilterText = text => {
-        this.arrayholder = data;
-        console.log(text);
-        const newData = this.arrayholder.filter(item => {
-            const itemData = `${item.title.toUpperCase()}`;
-            console.log(itemData);
-            const textData = text.toUpperCase();
-            console.log('HALLI')
-            console.log(itemData.indexOf(textData));
-            return itemData.indexOf(textData) > -1;
-        });
-        console.log(newData);
-
-        this.setState({data: newData});
-    };
-    _renderItem = ({item, index}) => {
-        return (
-            <View style={styles.slide}>
-                <Text style={styles.title}>{item.title}</Text>
-            </View>
-        );
     }
 
 //<Text style={styles.innerText}> Berlin</Text>
@@ -153,9 +121,9 @@ export default class ReservationScreen extends React.Component {
         const {search} = this.state;
         return (
             <View style={styles.container}>
-            <View style={styles2.imgContainer}>
-                <ImageBackground source={require('../assets/images/rest1.jpg')} resizeMode="cover" style={styles2.backImage} imageStyle={{opacity: 1}} />
-            </View>
+                <View style={styles2.imgContainer}>
+                    <ImageBackground source={require('../assets/images/rest1.jpg')} resizeMode="cover" style={styles2.backImage} imageStyle={{opacity: 1}} />
+                </View>
                 <ScrollView style={styles2.container} contentContainerStyle={styles2.contentContainer}>
                     <Text style={styles2.getHeaderText}>Restaurant Schatzkammer</Text>
                     <Text> </Text>
@@ -170,9 +138,9 @@ export default class ReservationScreen extends React.Component {
                             }}
                             itemLabelStyle={{color: 'white'}}
                             onItemPress={() => console.log("ABCD")}
-                            style={{width:'100%', alignItems: 'stretch'}}
+                            style={{width:'100%', selfAlign: 'flex-start'}}
                             onMaxError={() => {
-                                console.log("hd")
+                                console.log("this user clicks very often!")
                             }}
                         />
                     </View>

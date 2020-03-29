@@ -56,16 +56,18 @@ export default function BottomTabNavigator({navigation, route}) {
                 ({route}) => ({
                     tabBarIcon: ({focused, color, size}) => {
                         let iconName;
+                       // let color;
                         if (route.name === 'Home') {
                             iconName = focused
                                 ? 'ios-bookmarks'
-                                : 'md-bookmark';
+                                : 'ios-bookmarks';
                         } else if (route.name === 'Settings') {
-                            iconName = focused ? 'ios-list-box' : 'ios-list';
+                            iconName = focused ? 'ios-list-box' : 'ios-list-box';
                         } else if (route.name ==='Karte'){
                             iconName = focused ? 'md-map' :
-                                'ios-compass';
-                        }
+                                'md-map';
+                        };
+                        color = focused ? Colors.orangeColor : Colors.tabIconDefault;
                         return <TabBarIcon name={iconName} size={size} color={color}/>;
                     },
                 })}
@@ -109,7 +111,7 @@ function showHeader(route) {
         case 'Settings':
             return false;
         case 'Reservation':
-            return true;
+            return false;
         case 'Karte':
             return false;
     }
